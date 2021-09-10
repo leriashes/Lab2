@@ -25,7 +25,8 @@ struct reader {
 };
 
 struct publishing {
-
+	string name;	//Название
+	string city;	//Город
 };
 
 struct book {
