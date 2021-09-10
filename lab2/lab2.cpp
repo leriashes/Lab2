@@ -17,14 +17,14 @@ struct publishing {
 };
 
 struct book {
-	string title;
-	author author_info;
-	int pages_number;
-	string genre;
-	reader reader_info;
-	publishing publ_info;
-	int inv_number;
-	int publ_year;
+	string title;			//Название книги
+	author author_info;		//Автор
+	int pages_number;		//Количество страниц
+	string genre;			//Жанр
+	reader reader_info;		//Читатель
+	publishing publ_info;	//Издательство
+	int inv_number;			//Инвентарный номер
+	int publ_year;			//Год
 };
 
 int main() {
