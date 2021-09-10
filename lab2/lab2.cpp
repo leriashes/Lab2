@@ -18,7 +18,10 @@ struct author {
 };
 
 struct reader {
-
+	string full_name;	//ФИО
+	date birth;			//Дата рождения
+	date book_get;		//Дата взятия книги
+	string address;		//Адрес
 };
 
 struct publishing {
