@@ -4,12 +4,14 @@
 #include <locale.h>
 using namespace std;
 
+//Дата
 struct date {
 	int day;	//День
 	int month;	//Месяц
 	int year;	//Год
 };
 
+//Автор
 struct author {
 	string full_name;	//ФИО
 	date birth;			//Дата рождения
@@ -17,6 +19,7 @@ struct author {
 	string country;		//Страна
 };
 
+//Читатель
 struct reader {
 	string full_name;	//ФИО
 	date birth;			//Дата рождения
@@ -24,11 +27,13 @@ struct reader {
 	string address;		//Адрес
 };
 
+//Издательство
 struct publishing {
 	string name;	//Название
 	string city;	//Город
 };
 
+//Книга
 struct book {
 	string title;			//Название книги
 	author author_info;		//Автор
