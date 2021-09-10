@@ -4,8 +4,17 @@
 #include <locale.h>
 using namespace std;
 
-struct author {
+struct date {
+	int day;	//День
+	int month;	//Месяц
+	int year;	//Год
+};
 
+struct author {
+	string full_name;	//ФИО
+	date birth;			//Дата рождения
+	date death;			//Дата смерти?
+	string country;		//Страна
 };
 
 struct reader {
