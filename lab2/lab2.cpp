@@ -19,12 +19,20 @@ struct author {
 	string country;		//Страна
 };
 
+//Адрес
+struct address {
+	string city;	//Название населённого пункта
+	string street;	//Название улицы
+	int house;		//Номер дома
+	int flat;		//Номер квартиры
+};
+
 //Читатель
 struct reader {
 	string full_name;	//ФИО
 	date birth;			//Дата рождения
 	date book_get;		//Дата взятия книги
-	string address;		//Адрес
+	address r_address;		//Адрес
 };
 
 //Издательство
@@ -46,5 +54,16 @@ struct book {
 };
 
 int main() {
+	setlocale(LC_ALL, "Rus");	//Для вывода на русском языке
 
+	book *books;
+	publishing publishings;
+	reader *readers;
+	author *authors;
+
+	do {
+		;
+	} while (_getch() != 27);
+
+	return 0;
 }
