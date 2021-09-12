@@ -21,6 +21,28 @@ date setDate() {
 	return s_date;
 }
 
+//Ввод даты
+date enterDate() {
+	date e_date;
+	char dat[10];
+
+	printf("Введите дату (например: 01.01.1999): ");
+	gets_s(dat);
+
+	e_date.day = dat[0] * 10 + dat[1];
+	e_date.month = dat[3] * 10 + dat[4];
+	e_date.year = dat[6] * 1000 + dat[7] * 100 + dat[8] * 10 + dat[9];
+
+	return e_date;
+}
+
+//Печать даты
+void printDate(date p_date) {
+	printf("%d.%d.%d", p_date.day, p_date.month, p_date.year);
+	return;
+}
+
+
 //Автор
 struct author {
 	string full_name;	//ФИО
