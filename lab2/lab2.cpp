@@ -96,10 +96,10 @@ address enterAddress() {
 	getline(cin, e_address.street);
 
 	printf("\nВведите номер дома: ");
-	scanf("%d", e_address.house);
+	scanf("%d", &e_address.house);
 
 	printf("Введите номер квартиры: ");
-	scanf("%d", e_address.flat);
+	scanf("%d", &e_address.flat);
 
 	return e_address;
 }
@@ -120,6 +120,37 @@ struct reader {
 	address r_address;	//Адрес
 	int doc_number;		//Номер документа, удостоверяющего личность
 };
+
+//Ввод информации о читателе
+reader enterReader() {
+	reader e_reader;
+
+	printf("Введите ФИО читателя: ");
+	getline(cin, e_reader.full_name);
+
+	printf("\nВведите номер документа, удостоверяющего личность: ");
+	scanf("%d", &e_reader.doc_number);
+
+	printf("Дата рождения читателя\n");
+	e_reader.birth = enterDate();
+
+	printf("Адрес проживания\n");
+	e_reader.r_address = enterAddress();
+
+	return e_reader;
+}
+
+//Печать информации о читателе
+void printReader(reader p_reader) {
+	printf("%d %s (дата рождения: ", p_reader.doc_number, p_reader.full_name);
+	printDate(p_reader.birth);
+	printf("; адрес: ");
+	printAddress(p_reader.r_address);
+	printf(")");
+
+	return;
+}
+
 
 
 //Издательство
