@@ -2,6 +2,8 @@
 #include <iostream>
 #include <conio.h>
 #include <locale.h>
+#include <stdio.h>
+#include <string>
 using namespace std;
 
 //Дата
@@ -10,6 +12,13 @@ struct date {
 	int month;	//Месяц
 	int year;	//Год
 };
+
+//Установка значений по умолчанию
+date setDate() {
+	date s_date;
+	s_date.day = s_date.month = s_date.year = 0;
+	return s_date;
+}
 
 //Автор
 struct author {
@@ -41,6 +50,24 @@ struct publishing {
 	string city;	//Город
 };
 
+publishing enterPublishing() {
+	publishing e_publishing;
+
+	printf("Введите название издательства: ");
+	getline(cin, e_publishing.name);
+
+	printf("\nВведите город, в котором находится издательство: ");
+	getline(cin, e_publishing.city);
+
+	return e_publishing;
+}
+
+void printPublishing(publishing p_publishing) {
+	printf("%s, %s", p_publishing.name, p_publishing.city);
+
+	return;
+}
+
 //Книга
 struct book {
 	string title;			//Название книги
@@ -60,7 +87,7 @@ int main() {
 	publishing *publishings;
 	reader *readers;
 	author *authors;
-
+	
 	do {
 		system("cls");
 		printf("demo Билиотека\n\n");
@@ -73,7 +100,7 @@ int main() {
 
 		act -= 48;
 		if (act == 1) {
-
+			;
 		}
 		else if (act == 2) {
 			;
@@ -93,6 +120,7 @@ int main() {
 		else {
 			printf("\n\nВы уверены, что хотите выйти? (Для выхода нажмите esc, для продолжения - любую клавишу.) ");
 		}
+
 	} while (_getch() != 27);
 
 	return 0;
