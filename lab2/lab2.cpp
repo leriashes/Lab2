@@ -14,11 +14,15 @@ struct date {
 	int year;	//Год
 };
 
-//Установка значений по умолчанию
-date setDate() {
-	date s_date;
-	s_date.day = s_date.month = s_date.year = 0;
-	return s_date;
+//Дата начальная
+date noDate() {
+	date no_date;
+
+	no_date.day = 1;
+	no_date.month = 1;
+	no_date.year = 1991;
+
+	return no_date;
 }
 
 //Ввод даты
@@ -85,6 +89,18 @@ struct address {
 	int flat;		//Номер квартиры
 };
 
+//Начальный адрес
+address noAddress() {
+	address no_address;
+
+	no_address.city = "Нет";
+	no_address.street = "Нет";
+	no_address.house = 1;
+	no_address.flat = 1;
+
+	return no_address;
+}
+
 //Ввод адреса
 address enterAddress() {
 	address e_address;
@@ -96,10 +112,10 @@ address enterAddress() {
 	getline(cin, e_address.street);
 
 	printf("\nВведите номер дома: ");
-	scanf("%d", &e_address.house);
+	cin >> e_address.house;
 
 	printf("Введите номер квартиры: ");
-	scanf("%d", &e_address.flat);
+	cin >> e_address.flat;
 
 	return e_address;
 }
@@ -122,6 +138,18 @@ struct reader {
 	int doc_number;		//Номер документа, удостоверяющего личность
 };
 
+//Читателя нет
+reader noReader() {
+	reader no_reader;
+
+	no_reader.full_name = "Нет";
+	no_reader.birth = noDate();
+	no_reader.r_address = noAddress();
+	no_reader.doc_number = 0;
+
+	return no_reader;
+}
+
 //Ввод информации о читателе
 reader enterReader() {
 	reader e_reader;
@@ -130,7 +158,7 @@ reader enterReader() {
 	getline(cin, e_reader.full_name);
 
 	printf("\nВведите номер документа, удостоверяющего личность: ");
-	scanf("%d", &e_reader.doc_number);
+	cin >> e_reader.doc_number;
 
 	printf("Дата рождения читателя\n");
 	e_reader.birth = enterDate();
@@ -192,6 +220,45 @@ struct book {
 	int publ_year;			//Год
 };
 
+//Ввод информации о книге
+book enterBook() {
+	book e_book;
+	
+	e_book.reader_info = noReader();
+
+	printf("Введите инвентарный номер книги: ");
+	cin >> e_book.inv_number;
+
+	printf("Введите название книги: ");
+	getline(cin, e_book.title);
+
+	printf("\n");
+	e_book.author_info = enterAuthor();
+
+	printf("\nВведите количество страниц в книге: ");
+	cin >> e_book.pages_number;
+
+	printf("\nВведите жанр книги: ");
+	getline(cin, e_book.genre);
+
+	printf("\n");
+	e_book.publ_info = enterPublishing();
+
+	printf("\nВведите год выпуска книги: ");
+	cin >> e_book.publ_year;
+
+	return e_book;
+}
+
+//Печать информации о книге
+void printBook(book p_book) {
+	cout << p_book.inv_number << " \"" << p_book.title << "\", " << p_book.author_info.full_name << " / " << p_book.genre << ", " << p_book.publ_year << ", " << p_book.publ_info.name;
+	if (p_book.reader_info.full_name != "Нет")
+		cout << "(" << p_book.reader_info.full_name << ")";
+	return;
+}
+
+
 int main() {
 	setlocale(LC_ALL, "Rus");	//Для вывода на русском языке
 	SetConsoleCP(1251);
@@ -205,11 +272,6 @@ int main() {
 	do {
 		system("cls");
 		printf("demo Билиотека\n\n");
-
-		publishing p = enterPublishing();
-		printPublishing(p);
-		string newfilm;
-		getline(cin, newfilm);
 
 		char act;
 		printf("1 Добавить новую книгу\n2 Добавить нового читателя\n3 Добавить нового писателя\n4 Добавить новове издательство\n5 Взятие книги\n6 Сдача книги\n\n7 Выход\n\nВведите номер действия ");
