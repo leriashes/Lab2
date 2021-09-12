@@ -85,6 +85,34 @@ struct address {
 	int flat;		//Номер квартиры
 };
 
+//Ввод адреса
+address enterAddress() {
+	address e_address;
+
+	printf("Введите название населённого пункта (например: г. Барнаул): ");
+	getline(cin, e_address.city);
+
+	printf("\nВведите название улицы: ");
+	getline(cin, e_address.street);
+
+	printf("\nВведите номер дома: ");
+	scanf("%d", e_address.house);
+
+	printf("Введите номер квартиры: ");
+	scanf("%d", e_address.flat);
+
+	return e_address;
+}
+
+//Печать адреса
+void printAddress(address p_address) {
+	printf("%s, ул. %s, д. %d, кв. %d", p_address.city, p_address.street, p_address.house, p_address.flat);
+
+	return;
+}
+
+
+
 //Читатель
 struct reader {
 	string full_name;	//ФИО
