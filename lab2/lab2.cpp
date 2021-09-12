@@ -28,14 +28,14 @@ date noDate() {
 //Ввод даты
 date enterDate() {
 	date e_date;
-	char dat[10];
+	string dat;
 
 	printf("Введите дату (например: 01.01.1999): ");
-	gets_s(dat);
+	getline(cin, dat);
 
-	e_date.day = dat[0] * 10 + dat[1];
-	e_date.month = dat[3] * 10 + dat[4];
-	e_date.year = dat[6] * 1000 + dat[7] * 100 + dat[8] * 10 + dat[9];
+	e_date.day = dat[0] * 10 + dat[1] - 528;
+	e_date.month = dat[3] * 10 + dat[4] - 528;
+	e_date.year = dat[6] * 1000 + dat[7] * 100 + dat[8] * 10 + dat[9] - 53328;
 
 	return e_date;
 }
@@ -211,32 +211,36 @@ void printPublishing(publishing p_publishing) {
 //Книга
 struct book {
 	string title;			//Название книги
-	author author_info;		//Автор
+	/*author author_info;		//Автор
 	int pages_number;		//Количество страниц
 	string genre;			//Жанр
 	reader reader_info;		//Читатель
 	publishing publ_info;	//Издательство
 	int inv_number;			//Инвентарный номер
-	int publ_year;			//Год
+	int publ_year;			//Год*/
 };
+
+//void printBook(book p_book);
 
 //Ввод информации о книге
 book enterBook() {
 	book e_book;
 	
-	e_book.reader_info = noReader();
+	/*e_book.reader_info = noReader();
 
 	printf("Введите инвентарный номер книги: ");
 	cin >> e_book.inv_number;
+	while (getchar() != '\n');*/
 
-	printf("Введите название книги: ");
+	printf("\nВведите название книги: ");
 	getline(cin, e_book.title);
 
-	printf("\n");
+	/*printf("\n");
 	e_book.author_info = enterAuthor();
 
 	printf("\nВведите количество страниц в книге: ");
 	cin >> e_book.pages_number;
+	while (getchar() != '\n');
 
 	printf("\nВведите жанр книги: ");
 	getline(cin, e_book.genre);
@@ -246,17 +250,19 @@ book enterBook() {
 
 	printf("\nВведите год выпуска книги: ");
 	cin >> e_book.publ_year;
+	while (getchar() != '\n');
 
+	printBook(e_book);*/
 	return e_book;
 }
 
 //Печать информации о книге
-void printBook(book p_book) {
+/*void printBook(book p_book) {
 	cout << p_book.inv_number << " \"" << p_book.title << "\", " << p_book.author_info.full_name << " / " << p_book.genre << ", " << p_book.publ_year << ", " << p_book.publ_info.name;
 	if (p_book.reader_info.full_name != "Нет")
 		cout << "(" << p_book.reader_info.full_name << ")";
 	return;
-}
+}*/
 
 
 int main() {
@@ -264,38 +270,37 @@ int main() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	book *books;
-	publishing *publishings;
-	reader *readers;
-	author *authors;
-	
+	book* books = NULL;
+	publishing* publishings;
+	reader* readers;
+	author* authors;
+
+	int n_books = 0;
 	do {
 		system("cls");
 		printf("demo Билиотека\n\n");
 
 		char act;
-		printf("1 Добавить новую книгу\n2 Добавить нового читателя\n3 Добавить нового писателя\n4 Добавить новове издательство\n5 Взятие книги\n6 Сдача книги\n\n7 Выход\n\nВведите номер действия ");
+		printf("1 Добавить новую книгу\n2 Выдача книги\n3 Принятие книги\n\n4 Выход\n\nВведите номер действия ");
 		do {
 			act = _getch();
-		} while (act < '1' || act > '7');
+		} while (act < '1' || act > '4');
 
 		act -= 48;
 		if (act == 1) {
-			;
+			n_books += 1;
+			if (n_books == 1)
+				books = (book*)malloc(sizeof(book));
+			else
+				books = (book*)realloc(books, sizeof(book));
+			book a = enterBook();
+			*(books + n_books - 1) = a;
+			//printBook(*(books + n_books - 1));
 		}
 		else if (act == 2) {
 			;
 		}
 		else if (act == 3) {
-			;
-		}
-		else if (act == 4) {
-
-		}
-		else if (act == 5) {
-			;
-		}
-		else if (act == 6) {
 			;
 		}
 		else {
