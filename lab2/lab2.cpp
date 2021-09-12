@@ -43,13 +43,39 @@ void printDate(date p_date) {
 }
 
 
+
 //Автор
 struct author {
 	string full_name;	//ФИО
 	date birth;			//Дата рождения
-	date death;			//Дата смерти
 	string country;		//Страна
 };
+
+//Ввод информации об авторе
+author enterAuthor() {
+	author e_author;
+	printf("Введите ФИО автора: ");
+	getline(cin, e_author.full_name);
+
+	printf("\nДата рождения автора\n");
+	e_author.birth = enterDate();
+
+	printf("\nВведите страну рождения автора: ");
+	getline(cin, e_author.country);
+
+	return e_author;
+}
+
+//Печать информации об авторе
+void printAuthor(author p_author) {
+	printf("%s (", p_author.full_name);
+	printDate(p_author.birth);
+	printf(", %s)", p_author.country);
+
+	return;
+}
+
+
 
 //Адрес
 struct address {
