@@ -50,22 +50,22 @@ void printDate(date p_date) {
 
 //Автор
 struct author {
-	string full_name;	//ФИО
+	char full_name[50];	//ФИО
 	date birth;			//Дата рождения
-	string country;		//Страна
+	char country[30];	//Страна
 };
 
 //Ввод информации об авторе
 author enterAuthor() {
 	author e_author;
 	printf("Введите ФИО автора: ");
-	getline(cin, e_author.full_name);
+	gets_s(e_author.full_name);
 
 	printf("\nДата рождения автора\n");
 	e_author.birth = enterDate();
 
 	printf("\nВведите страну рождения автора: ");
-	getline(cin, e_author.country);
+	gets_s(e_author.country);
 
 	return e_author;
 }
@@ -83,8 +83,8 @@ void printAuthor(author p_author) {
 
 //Адрес
 struct address {
-	string city;	//Название населённого пункта
-	string street;	//Название улицы
+	char city[30];	//Название населённого пункта
+	char street[40];	//Название улицы
 	int house;		//Номер дома
 	int flat;		//Номер квартиры
 };
@@ -93,8 +93,8 @@ struct address {
 address noAddress() {
 	address no_address;
 
-	no_address.city = "Нет";
-	no_address.street = "Нет";
+	strcpy(no_address.city, "Нет");
+	strcpy(no_address.street, "Нет");
 	no_address.house = 1;
 	no_address.flat = 1;
 
@@ -106,10 +106,10 @@ address enterAddress() {
 	address e_address;
 
 	printf("Введите название населённого пункта (например: г. Барнаул): ");
-	getline(cin, e_address.city);
+	gets_s(e_address.city);
 
 	printf("\nВведите название улицы: ");
-	getline(cin, e_address.street);
+	gets_s(e_address.street);
 
 	printf("\nВведите номер дома: ");
 	cin >> e_address.house;
@@ -132,7 +132,7 @@ void printAddress(address p_address) {
 
 //Читатель
 struct reader {
-	string full_name;	//ФИО
+	char full_name[50];	//ФИО
 	date birth;			//Дата рождения
 	address r_address;	//Адрес
 	int doc_number;		//Номер документа, удостоверяющего личность
@@ -142,7 +142,7 @@ struct reader {
 reader noReader() {
 	reader no_reader;
 
-	no_reader.full_name = "Нет";
+	strcpy(no_reader.full_name, "Нет");
 	no_reader.birth = noDate();
 	no_reader.r_address = noAddress();
 	no_reader.doc_number = 0;
@@ -155,7 +155,7 @@ reader enterReader() {
 	reader e_reader;
 
 	printf("Введите ФИО читателя: ");
-	getline(cin, e_reader.full_name);
+	gets_s(e_reader.full_name);
 
 	printf("\nВведите номер документа, удостоверяющего личность: ");
 	cin >> e_reader.doc_number;
@@ -165,6 +165,9 @@ reader enterReader() {
 
 	printf("Адрес проживания\n");
 	e_reader.r_address = enterAddress();
+	/*address* ad;
+	ad = (address*)malloc(sizeof(address));*/
+	
 
 	return e_reader;
 }
@@ -184,8 +187,8 @@ void printReader(reader p_reader) {
 
 //Издательство
 struct publishing {
-	string name;	//Название
-	string city;	//Город
+	char name[30];	//Название
+	char city[30];	//Город
 };
 
 //Ввод информации об издательстве
@@ -193,10 +196,10 @@ publishing enterPublishing() {
 	publishing e_publishing;
 	setlocale(LC_ALL, "Rus");
 	printf("Введите название издательства: ");
-	getline(cin, e_publishing.name);
+	gets_s(e_publishing.name);
 
 	printf("\nВведите город, в котором находится издательство: ");
-	getline(cin, e_publishing.city);
+	gets_s(e_publishing.city);
 
 	return e_publishing;
 }
@@ -210,32 +213,30 @@ void printPublishing(publishing p_publishing) {
 
 //Книга
 struct book {
-	string title;			//Название книги
-	/*author author_info;		//Автор
+	char title[30];			//Название книги
+	author author_info;		//Автор
 	int pages_number;		//Количество страниц
-	string genre;			//Жанр
+	char genre[20];				//Жанр
 	reader reader_info;		//Читатель
 	publishing publ_info;	//Издательство
 	int inv_number;			//Инвентарный номер
-	int publ_year;			//Год*/
+	int publ_year;			//Год
 };
-
-//void printBook(book p_book);
 
 //Ввод информации о книге
 book enterBook() {
 	book e_book;
 	
-	/*e_book.reader_info = noReader();
+	e_book.reader_info = noReader();
 
 	printf("Введите инвентарный номер книги: ");
 	cin >> e_book.inv_number;
-	while (getchar() != '\n');*/
+	while (getchar() != '\n');
 
 	printf("\nВведите название книги: ");
-	getline(cin, e_book.title);
+	gets_s(e_book.title);
 
-	/*printf("\n");
+	printf("\n");
 	e_book.author_info = enterAuthor();
 
 	printf("\nВведите количество страниц в книге: ");
@@ -243,7 +244,7 @@ book enterBook() {
 	while (getchar() != '\n');
 
 	printf("\nВведите жанр книги: ");
-	getline(cin, e_book.genre);
+	gets_s(e_book.genre);
 
 	printf("\n");
 	e_book.publ_info = enterPublishing();
@@ -252,17 +253,16 @@ book enterBook() {
 	cin >> e_book.publ_year;
 	while (getchar() != '\n');
 
-	printBook(e_book);*/
 	return e_book;
 }
 
 //Печать информации о книге
-/*void printBook(book p_book) {
+void printBook(book p_book) {
 	cout << p_book.inv_number << " \"" << p_book.title << "\", " << p_book.author_info.full_name << " / " << p_book.genre << ", " << p_book.publ_year << ", " << p_book.publ_info.name;
-	if (p_book.reader_info.full_name != "Нет")
+	if (strcmp(p_book.reader_info.full_name, "Нет") != 0)
 		cout << "(" << p_book.reader_info.full_name << ")";
 	return;
-}*/
+}
 
 
 int main() {
@@ -293,9 +293,8 @@ int main() {
 				books = (book*)malloc(sizeof(book));
 			else
 				books = (book*)realloc(books, sizeof(book));
-			book a = enterBook();
-			*(books + n_books - 1) = a;
-			//printBook(*(books + n_books - 1));
+			*(books + n_books - 1) = enterBook();
+			printBook(*(books + n_books - 1));
 		}
 		else if (act == 2) {
 			;
