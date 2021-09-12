@@ -68,9 +68,9 @@ author enterAuthor() {
 
 //Печать информации об авторе
 void printAuthor(author p_author) {
-	printf("%s (", p_author.full_name);
+	cout << p_author.full_name << "(";
 	printDate(p_author.birth);
-	printf(", %s)", p_author.country);
+	cout << ", " << p_author.country << ")";
 
 	return;
 }
@@ -106,7 +106,8 @@ address enterAddress() {
 
 //Печать адреса
 void printAddress(address p_address) {
-	printf("%s, ул. %s, д. %d, кв. %d", p_address.city, p_address.street, p_address.house, p_address.flat);
+	cout << p_address.city << "ул. " << p_address.street;
+	printf(", д. %d, кв. %d", p_address.house, p_address.flat);
 
 	return;
 }
@@ -142,7 +143,7 @@ reader enterReader() {
 
 //Печать информации о читателе
 void printReader(reader p_reader) {
-	printf("%d %s (дата рождения: ", p_reader.doc_number, p_reader.full_name);
+	cout << p_reader.doc_number << " " << p_reader.full_name << "(дата рождения: ";
 	printDate(p_reader.birth);
 	printf("; адрес: ");
 	printAddress(p_reader.r_address);
