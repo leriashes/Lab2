@@ -18,13 +18,26 @@ struct date {
 date enterDate() {
 	date e_date;
 	string dat;
+	int f;
 
-	printf("Введите дату (например: 01.01.1999): ");
-	getline(cin, dat);
+	do {
+		f = 0;
+		printf("Введите дату (например: 01.01.1999): ");
+		getline(cin, dat);
 
-	/*e_date.day = dat[0] * 10 + dat[1] - 528;
+		if (dat.length() >= 10) {
+			for (int i = 0; i < 10; i++)
+				if (i != 2 && i != 5 && !isdigit(dat[i]))
+					f = 1;
+		}
+		else
+			f = 1;
+
+	} while (f);
+
+	e_date.day = dat[0] * 10 + dat[1] - 528;
 	e_date.month = dat[3] * 10 + dat[4] - 528;
-	e_date.year = dat[6] * 1000 + dat[7] * 100 + dat[8] * 10 + dat[9] - 53328;*/
+	e_date.year = dat[6] * 1000 + dat[7] * 100 + dat[8] * 10 + dat[9] - 53328;
 
 	return e_date;
 }
