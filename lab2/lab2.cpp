@@ -124,7 +124,7 @@ address enterAddress() {
 
 //Печать адреса
 void printAddress(address p_address) {
-	cout << p_address.city << "ул. " << p_address.street;
+	cout << p_address.city << ", ул. " << p_address.street;
 	printf(", д. %d, кв. %d", p_address.house, p_address.flat);
 
 	return;
@@ -168,16 +168,13 @@ reader enterReader() {
 
 	printf("\nАдрес проживания\n");
 	e_reader.r_address = enterAddress();
-	/*address* ad;
-	ad = (address*)malloc(sizeof(address));*/
-	
 
 	return e_reader;
 }
 
 //Печать информации о читателе
 void printReader(reader p_reader) {
-	cout << p_reader.doc_number << " " << p_reader.full_name << "(дата рождения: ";
+	cout << p_reader.doc_number << " " << p_reader.full_name << " (дата рождения: ";
 	printDate(p_reader.birth);
 	printf("; адрес: ");
 	printAddress(p_reader.r_address);
@@ -267,9 +264,7 @@ int main() {
 	SetConsoleOutputCP(1251);
 
 	book* books = NULL;
-	publishing* publishings;
 	reader* readers;
-	author* authors;
 
 	int n_books = 0;
 	int n_readers = 0;
@@ -291,7 +286,7 @@ int main() {
 		//Добавление новой книги
 		if (act == 1) {
 			system("cls");
-			printf("demo Билиотека\n\nНОВАЯ КНИГА\n\n");
+			printf("demo Билиотека\n\nНОВАЯ КНИГА\n");
 
 			n_books += 1;
 			if (n_books == 1)
@@ -319,19 +314,23 @@ int main() {
 				while (getchar() != '\n');
 
 				if (inv_number > 0 && inv_number <= n_books) {
-					printf("\n\nВведите номер документа читателя: ");
-					cin >> doc_numb;
-					while (getchar() != '\n');
+					if ((books + inv_number - 1)->reader_info == NULL) {
+						printf("\n\nВведите номер документа читателя: ");
+						cin >> doc_numb;
+						while (getchar() != '\n');
 
-					for (int i = 0; i < n_readers && f; i++) {
-						if ((readers + i)->doc_number == doc_numb) {
-							(books + inv_number - 1)->reader_info = (readers + i);
-							f = 0;
+						for (int i = 0; i < n_readers && f; i++) {
+							if ((readers + i)->doc_number == doc_numb) {
+								(books + inv_number - 1)->reader_info = (readers + i);
+								f = 0;
+							}
 						}
-					}
 
-					if (f)
-						printf("\nЧитателя с таким номером документа нет.");
+						if (f)
+							printf("\nЧитателя с таким номером документа нет.");
+					}
+					else
+						printf("Книга выдана читателю: %d - %s.", (books + inv_number - 1)->reader_info->doc_number, (books + inv_number - 1)->reader_info->full_name);
 				}
 				else
 					printf("\nКниги с таким инвентарным номером нет.");
@@ -384,7 +383,7 @@ int main() {
 				printf("Список пуст.");
 			else
 				for (int i = 0; i < n_books; i++) {
-					printf("%d", i + 1);
+					printf("%d) ", i + 1);
 					printBook(*(books + i));
 					printf("\n");
 				}
@@ -420,7 +419,7 @@ int main() {
 				printf("Список пуст.");
 			else
 				for (int i = 0; i < n_readers; i++) {
-					printf("%d)", i + 1);
+					printf("%d) ", i + 1);
 					printReader(*(readers + i));
 					printf("\n");
 				}
@@ -428,6 +427,8 @@ int main() {
 			printf("\n\nНажмите любую клавишу для выхода в меню, для выхода из программы нажмите esc.");
 		}
 		else {
+			system("cls");
+			printf("demo Билиотека\n\n");
 			printf("\n\nВы уверены, что хотите выйти? (Для выхода нажмите esc, для продолжения - любую клавишу.) ");
 		}
 
