@@ -14,17 +14,6 @@ struct date {
 	int year;	//Год
 };
 
-//Дата начальная
-date noDate() {
-	date no_date;
-
-	no_date.day = 1;
-	no_date.month = 1;
-	no_date.year = 1991;
-
-	return no_date;
-}
-
 //Ввод даты
 date enterDate() {
 	date e_date;
@@ -89,18 +78,6 @@ struct address {
 	int flat;		//Номер квартиры
 };
 
-//Начальный адрес
-address noAddress() {
-	address no_address;
-
-	strcpy(no_address.city, "Нет");
-	strcpy(no_address.street, "Нет");
-	no_address.house = 1;
-	no_address.flat = 1;
-
-	return no_address;
-}
-
 //Ввод адреса
 address enterAddress() {
 	address e_address;
@@ -139,18 +116,6 @@ struct reader {
 	address r_address;	//Адрес
 	int doc_number;		//Номер документа, удостоверяющего личность
 };
-
-//Читателя нет
-/*reader noReader() {
-	reader no_reader;
-
-	strcpy(no_reader.full_name, "Нет");
-	no_reader.birth = noDate();
-	no_reader.r_address = noAddress();
-	no_reader.doc_number = 0;
-
-	return no_reader;
-}*/
 
 //Ввод информации о читателе
 reader enterReader() {
