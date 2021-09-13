@@ -264,8 +264,8 @@ int main() {
 	SetConsoleOutputCP(1251);
 
 
-	book* books = NULL, d_book;
-	reader* readers, d_reader;
+	book* books = NULL, *d_book;
+	reader* readers, *d_reader;
 
 	int n_books = 0;
 	int n_readers = 0;
@@ -280,7 +280,7 @@ int main() {
 		printf("1 Добавить новую книгу\n2 Выдача книги\n3 Принятие книги\n4 Список книг\n5 Добавить нового читателя\n6 Список читателей\n7 Удалить книгу\n8 Удалить читателя\n9 Выход\n\nВведите номер действия ");
 		do {
 			act = _getch();
-		} while (act < '1' || act > '7');
+		} while (act < '1' || act > '9');
 
 		act -= 48;
 
@@ -430,8 +430,79 @@ int main() {
 			printf("\n\nНажмите любую клавишу для выхода в меню, для выхода из программы нажмите esc.");
 		}
 
-		//Удаление читателя
-		//else if (act == 7)
+		//Удаление книги
+		else if (act == 7) {
+			int inv_number;
+			system("cls");
+			printf("demo Билиотека\n\nУДАЛЕНИЕ КНИГИ\n\n");
+
+			if (n_books > 0) {
+				printf("Введите инвентарный номер книги: ");
+				cin >> inv_number;
+				while (getchar() != '\n');
+
+				if (inv_number > 0 && inv_number <= n_books) {
+					d_book = (book*)calloc(n_books - 1, sizeof(book));
+					for (int i = 0, j = 0; i < n_books; i++)
+						if (i != inv_number - 1) {
+							*(d_book + j) = *(books + i);
+							j++;
+						}
+					n_books--;
+					free(books);
+					books = (book*)calloc(n_books, sizeof(book));
+					for (int i = 0; i < n_books; i++)
+						*(books + i) = *(d_book + i);
+					free(d_book);
+					printf("\nКнига удалена.");
+				}
+				else
+					printf("\nКниги с таким инвентарным номером нет.");
+			}
+			else
+				printf("\nСписок книг пуст.");
+
+			printf("\n\nНажмите любую клавишу для выхода в меню, для выхода из программы нажмите esc.");
+		}
+
+		else if (act == 8) {
+			int doc_numb, f = -1;
+			system("cls");
+			printf("demo Билиотека\n\nУДАЛЕНИЕ ЧИТАТЕЛЯ\n\n");
+
+			if (n_readers > 0) {
+				printf("Введите номер документа читателя: ");
+				cin >> doc_numb;
+				while (getchar() != '\n');
+
+				for (int i = 0; i < n_readers && f == -1; i++)
+					if ((readers + i)->doc_number == doc_numb)
+						f = i;
+
+				if (f == -1)
+					printf("\nЧитателя с таким номером документа нет.");
+				else {
+					d_reader = (reader*)calloc(n_readers - 1, sizeof(reader));
+					for (int i = 0, j = 0; i < n_readers; i++)
+						if (i != f) {
+							*(d_reader + j) = *(readers + i);
+							j++;
+						}
+					n_readers--;
+					free(readers);
+					readers = (reader*)calloc(n_readers, sizeof(reader));
+					for (int i = 0; i < n_readers; i++)
+						*(readers + i) = *(d_reader + i);
+					free(d_reader);
+					printf("\nЧитатель удалён.");
+				}
+
+			}
+			else
+				printf("\nСписок читателей пуст.");
+
+			printf("\n\nНажмите любую клавишу для выхода в меню, для выхода из программы нажмите esc.");
+		}
 
 		else {
 			system("cls");
