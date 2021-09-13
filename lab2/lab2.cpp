@@ -263,8 +263,9 @@ int main() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	book* books = NULL;
-	reader* readers;
+
+	book* books = NULL, d_book;
+	reader* readers, d_reader;
 
 	int n_books = 0;
 	int n_readers = 0;
@@ -276,7 +277,7 @@ int main() {
 		printf("demo Билиотека\n\n");
 
 		char act;
-		printf("1 Добавить новую книгу\n2 Выдача книги\n3 Принятие книги\n4 Список книг\n5 Добавить нового читателя\n6 Список читателей\n7 Выход\n\nВведите номер действия ");
+		printf("1 Добавить новую книгу\n2 Выдача книги\n3 Принятие книги\n4 Список книг\n5 Добавить нового читателя\n6 Список читателей\n7 Удалить книгу\n8 Удалить читателя\n9 Выход\n\nВведите номер действия ");
 		do {
 			act = _getch();
 		} while (act < '1' || act > '7');
@@ -328,9 +329,11 @@ int main() {
 
 						if (f)
 							printf("\nЧитателя с таким номером документа нет.");
+						else
+							printf("\nКнига выдана читателю: %d - %s.", (books + inv_number - 1)->reader_info->doc_number, (books + inv_number - 1)->reader_info->full_name);
 					}
 					else
-						printf("Книга выдана читателю: %d - %s.", (books + inv_number - 1)->reader_info->doc_number, (books + inv_number - 1)->reader_info->full_name);
+						printf("Книга уже была выдана читателю: %d - %s.", (books + inv_number - 1)->reader_info->doc_number, (books + inv_number - 1)->reader_info->full_name);
 				}
 				else
 					printf("\nКниги с таким инвентарным номером нет.");
@@ -426,6 +429,10 @@ int main() {
 
 			printf("\n\nНажмите любую клавишу для выхода в меню, для выхода из программы нажмите esc.");
 		}
+
+		//Удаление читателя
+		//else if (act == 7)
+
 		else {
 			system("cls");
 			printf("demo Билиотека\n\n");
@@ -434,5 +441,7 @@ int main() {
 
 	} while (_getch() != 27);
 
+	free(readers);
+	free(books);
 	return 0;
 }
