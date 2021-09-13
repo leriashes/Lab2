@@ -281,13 +281,16 @@ int main() {
 		printf("demo Билиотека\n\n");
 
 		char act;
-		printf("1 Добавить новую книгу\n2 Выдача книги\n3 Принятие книги\n\n4 Выход\n\nВведите номер действия ");
+		printf("1 Добавить новую книгу\n2 Выдача книги\n3 Принятие книги\n4 Список книг\n5 Выход\n\nВведите номер действия ");
 		do {
 			act = _getch();
 		} while (act < '1' || act > '4');
 
 		act -= 48;
 		if (act == 1) {
+			system("cls");
+			printf("demo Билиотека\n\nНОВАЯ КНИГА\n\n");
+
 			n_books += 1;
 			if (n_books == 1)
 				books = (book*)malloc(sizeof(book));
@@ -301,6 +304,18 @@ int main() {
 		}
 		else if (act == 3) {
 			;
+		}
+		else if (act == 4) {
+			system("cls");
+			printf("demo Билиотека\n\nСПИСОК КНИГ\n\n");
+
+			if (n_books < 1)
+				printf("Список пуст.");
+			else
+				for (int i = 0; i < n_books; i++) {
+					printBook(*(books + i));
+					printf("\n");
+				}
 		}
 		else {
 			printf("\n\nВы уверены, что хотите выйти? (Для выхода нажмите esc, для продолжения - любую клавишу.) ");
