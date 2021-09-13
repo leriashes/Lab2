@@ -302,7 +302,7 @@ int main() {
 			printf("\n");
 			printBook(*(books + n_books - 1));
 
-			printf("\n\nНажмите любую клавишу для выхода в меню.");
+			printf("\n\nНажмите любую клавишу для выхода в меню, для выхода из программы нажмите esc.");
 		}
 
 		//Выдача книги
@@ -341,7 +341,7 @@ int main() {
 			else
 				printf("\nСписок книг пуст.");
 
-			printf("\n\nНажмите любую клавишу для выхода в меню.");
+			printf("\n\nНажмите любую клавишу для выхода в меню, для выхода из программы нажмите esc.");
 
 		}
 
@@ -351,19 +351,31 @@ int main() {
 			system("cls");
 			printf("demo Билиотека\n\nПРИНЯТИЕ КНИГИ\n\n");
 
-			printf("Введите инвентарный номер книги: ");
-			cin >> inv_number;
-			while (getchar() != '\n');
+			if (n_readers > 0 && n_books > 0) {
+				printf("Введите инвентарный номер книги: ");
+				cin >> inv_number;
+				while (getchar() != '\n');
 
-			if (inv_number > 0 && inv_number <= n_books) {
-				//if (strcmp(*(books + inv_number - 1)->reader_info->full_name, "Нет") == 0)
-				//strcpy(*(books + inv_number - 1)->reader_info.full_name, "Нет");
+				if (inv_number > 0 && inv_number <= n_books) {
+					if ((books + inv_number - 1)->reader_info != NULL) {
+						(books + inv_number - 1)->reader_info = NULL;
+						printf("\nКнига принята.");
+					}
+					else
+						printf("\nКнига уже находится в библиотеке.");
+				}
+				else
+					printf("\nКниги с таким инвентарным номером нет.");
 			}
+			else if (n_readers == 0)
+				printf("\nСписок читателей пуст.");
 			else
-				printf("\nКниги с таким инвентарным номером нет.");
+				printf("\nСписок книг пуст.");
 
-			printf("\n\nНажмите любую клавишу для выхода в меню.");
+			printf("\n\nНажмите любую клавишу для выхода в меню, для выхода из программы нажмите esc.");
 		}
+
+		//Вывод списка книг
 		else if (act == 4) {
 			system("cls");
 			printf("demo Билиотека\n\nСПИСОК КНИГ\n\n");
@@ -372,12 +384,15 @@ int main() {
 				printf("Список пуст.");
 			else
 				for (int i = 0; i < n_books; i++) {
+					printf("%d", i + 1);
 					printBook(*(books + i));
 					printf("\n");
 				}
 
 			printf("\n\nНажмите любую клавишу для выхода в меню, для выхода из программы нажмите esc.");
 		}
+
+		//Добавление нового читателя
 		else if (act == 5) {
 			system("cls");
 			printf("demo Билиотека\n\nНОВЫЙ ЧИТАТЕЛЬ\n\n");
@@ -388,12 +403,29 @@ int main() {
 				readers = (reader*)malloc(sizeof(reader));
 			}
 			else
-				readers = (reader*)realloc(books, sizeof(reader) * n_readers);
+				readers = (reader*)realloc(readers, sizeof(reader) * n_readers);
 			*(readers + n_readers - 1) = enterReader();
 			printf("\n");
 			printReader(*(readers + n_readers - 1));
 
-			printf("\n\nНажмите любую клавишу для выхода в меню.");
+			printf("\n\nНажмите любую клавишу для выхода в меню, для выхода из программы нажмите esc.");
+		}
+
+		//Вывод списка читателей
+		else if (act == 6) {
+			system("cls");
+			printf("demo Билиотека\n\nСПИСОК ЧИТАТЕЛЕЙ\n\n");
+
+			if (n_readers < 1)
+				printf("Список пуст.");
+			else
+				for (int i = 0; i < n_readers; i++) {
+					printf("%d)", i + 1);
+					printReader(*(readers + i));
+					printf("\n");
+				}
+
+			printf("\n\nНажмите любую клавишу для выхода в меню, для выхода из программы нажмите esc.");
 		}
 		else {
 			printf("\n\nВы уверены, что хотите выйти? (Для выхода нажмите esc, для продолжения - любую клавишу.) ");
