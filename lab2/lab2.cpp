@@ -139,7 +139,7 @@ struct reader {
 };
 
 //Читателя нет
-reader noReader() {
+/*reader noReader() {
 	reader no_reader;
 
 	strcpy(no_reader.full_name, "Нет");
@@ -148,7 +148,7 @@ reader noReader() {
 	no_reader.doc_number = 0;
 
 	return no_reader;
-}
+}*/
 
 //Ввод информации о читателе
 reader enterReader() {
@@ -216,22 +216,15 @@ struct book {
 	char title[30];			//Название книги
 	author author_info;		//Автор
 	int pages_number;		//Количество страниц
-	char genre[20];				//Жанр
-	reader reader_info;		//Читатель
+	char genre[20];			//Жанр
+	reader *reader_info = NULL;	//Читатель
 	publishing publ_info;	//Издательство
-	int inv_number;			//Инвентарный номер
 	int publ_year;			//Год
 };
 
 //Ввод информации о книге
 book enterBook() {
 	book e_book;
-	
-	e_book.reader_info = noReader();
-
-	printf("Введите инвентарный номер книги: ");
-	cin >> e_book.inv_number;
-	while (getchar() != '\n');
 
 	printf("\nВведите название книги: ");
 	gets_s(e_book.title);
@@ -258,9 +251,9 @@ book enterBook() {
 
 //Печать информации о книге
 void printBook(book p_book) {
-	cout << p_book.inv_number << " \"" << p_book.title << "\", " << p_book.author_info.full_name << " / " << p_book.genre << ", " << p_book.publ_year << ", " << p_book.publ_info.name;
-	if (strcmp(p_book.reader_info.full_name, "Нет") != 0)
-		cout << "(" << p_book.reader_info.full_name << ")";
+	cout << " \"" << p_book.title << "\", " << p_book.author_info.full_name << " / " << p_book.genre << ", " << p_book.publ_year << ", " << p_book.publ_info.name;
+	if (p_book.reader_info != NULL)
+		cout << "(" << p_book.reader_info->full_name << ")";
 	return;
 }
 
@@ -276,17 +269,20 @@ int main() {
 	author* authors;
 
 	int n_books = 0;
+	int n_readers = 0;
 	do {
 		system("cls");
 		printf("demo Билиотека\n\n");
 
 		char act;
-		printf("1 Добавить новую книгу\n2 Выдача книги\n3 Принятие книги\n4 Список книг\n5 Выход\n\nВведите номер действия ");
+		printf("1 Добавить новую книгу\n2 Выдача книги\n3 Принятие книги\n4 Список книг\n5 Добавить нового читателя\n6 Список читателей\n7 Выход\n\nВведите номер действия ");
 		do {
 			act = _getch();
-		} while (act < '1' || act > '4');
+		} while (act < '1' || act > '7');
 
 		act -= 48;
+
+		//Добавление новой книги
 		if (act == 1) {
 			system("cls");
 			printf("demo Билиотека\n\nНОВАЯ КНИГА\n\n");
@@ -298,12 +294,32 @@ int main() {
 				books = (book*)realloc(books, sizeof(book));
 			*(books + n_books - 1) = enterBook();
 			printBook(*(books + n_books - 1));
+
+			printf("\n\nНажмите любую клавишу для выхода в меню.");
 		}
+
+		//Выдача книги
 		else if (act == 2) {
 			;
 		}
+
+		//Принятие книги
 		else if (act == 3) {
-			;
+			int inv_number;
+			system("cls");
+			printf("demo Билиотека\n\nПРИНЯТИЕ КНИГИ\n\n");
+
+			printf("Введите инвентарный номер книги: ");
+			cin >> inv_number;
+
+			if (inv_number <= n_books) {
+				//if (strcmp(*(books + inv_number - 1)->reader_info->full_name, "Нет") == 0)
+				//strcpy(*(books + inv_number - 1)->reader_info.full_name, "Нет");
+			}
+			else
+				printf("\nКниги с таким инвентарным номером нет.");
+
+			printf("\n\nНажмите любую клавишу для выхода в меню.");
 		}
 		else if (act == 4) {
 			system("cls");
@@ -316,6 +332,8 @@ int main() {
 					printBook(*(books + i));
 					printf("\n");
 				}
+
+			printf("\n\nНажмите любую клавишу для выхода в меню.");
 		}
 		else {
 			printf("\n\nВы уверены, что хотите выйти? (Для выхода нажмите esc, для продолжения - любую клавишу.) ");
