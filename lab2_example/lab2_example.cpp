@@ -53,6 +53,8 @@ int main() {
 	printf("\n\nПечать данных динамической переменной\n");
 	printDate(*date_d);
 
+	free(date_d);
+
 
 
 	//Работа со структурой address
@@ -71,6 +73,9 @@ int main() {
 	printf("\n\nПечать данных динамической переменной\n");
 	printAddress(*address_d);
 
+	free(address_d);
+
+
 
 	//Работа со структурой publishing
 	printf("\n\n\nРабота со структурой publishing\n");
@@ -87,6 +92,8 @@ int main() {
 
 	printf("\n\nПечать данных динамической переменной\n");
 	printPublishing(*publ_d);
+
+	free(publ_d);
 
 
 
@@ -124,6 +131,8 @@ int main() {
 	printf("\n\nПечать данных динамической переменной\n");
 	printAuthor(*author_d);
 
+	free(author_d);
+
 
 
 	//Работа со структурой book
@@ -159,5 +168,9 @@ int main() {
 	book_d->reader_info = reader_d;
 	printf("\n\nПечать данных динамической переменной\n");
 	printBook(*book_d);
+
+	free(book_d);
+	free(reader_d);
+
 	return 0;
 }
