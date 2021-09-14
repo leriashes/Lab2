@@ -53,6 +53,8 @@ int main() {
 	printf("\n\nПечать данных динамической переменной\n");
 	printDate(*date_d);
 
+
+
 	//Работа со структурой address
 	printf("\n\n\nРабота со структурой address\n");
 	//Ввод данных
@@ -68,5 +70,22 @@ int main() {
 
 	printf("\n\nПечать данных динамической переменной\n");
 	printAddress(*address_d);
+
+
+	//Работа со структурой publishing
+	printf("\n\n\nРабота со структурой publishing\n");
+	//Ввод данных
+	printf("Ввод данных в статическую переменную\n");
+	publ_st = enterPublishing();
+
+	printf("\nВвод данных в динамическую переменную\n");
+	*publ_d = enterPublishing();
+
+	//Вывод данных
+	printf("\n\nПечать данных статической переменной\n");
+	printPublishing(publ_st);
+
+	printf("\n\nПечать данных динамической переменной\n");
+	printPublishing(*publ_d);
 	return 0;
 }
