@@ -87,5 +87,77 @@ int main() {
 
 	printf("\n\nПечать данных динамической переменной\n");
 	printPublishing(*publ_d);
+
+
+
+	//Работа со структурой reader
+	printf("\n\n\nРабота со структурой reader\n");
+	//Ввод данных
+	printf("Ввод данных в статическую переменную\n");
+	reader_st = enterReader();
+
+	printf("\nВвод данных в динамическую переменную\n");
+	*reader_d = enterReader();
+
+	//Вывод данных
+	printf("\n\nПечать данных статической переменной\n");
+	printReader(reader_st);
+
+	printf("\n\nПечать данных динамической переменной\n");
+	printReader(*reader_d);
+
+
+
+	//Работа со структурой author
+	printf("\n\n\nРабота со структурой author\n");
+	//Ввод данных
+	printf("Ввод данных в статическую переменную\n");
+	author_st = enterAuthor();
+
+	printf("\nВвод данных в динамическую переменную\n");
+	*author_d = enterAuthor();
+
+	//Вывод данных
+	printf("\n\nПечать данных статической переменной\n");
+	printAuthor(author_st);
+
+	printf("\n\nПечать данных динамической переменной\n");
+	printAuthor(*author_d);
+
+
+
+	//Работа со структурой book
+	printf("\n\n\nРабота со структурой book\n");
+	//Ввод данных
+	printf("Ввод данных в статическую переменную\n");
+	book_st = enterBook();
+
+	printf("\n\nВвод данных в динамическую переменную\n");
+	*book_d = enterBook();
+
+	//Вывод данных
+	printf("\n\nПечать данных статической переменной\n");
+	printBook(book_st);
+
+	printf("\n\nПечать данных динамической переменной\n");
+	printBook(*book_d);
+
+
+	//Добавление читателя
+	book_st.reader_info = &reader_st;
+	printf("\n\n\nПечать данных статической переменной\n");
+	printBook(book_st);
+
+	book_st.reader_info = reader_d;
+	printf("\n\nПечать данных статической переменной\n");
+	printBook(book_st);
+
+	book_d->reader_info = &reader_st;
+	printf("\n\nПечать данных динамической переменной\n");
+	printBook(*book_d);
+
+	book_d->reader_info = reader_d;
+	printf("\n\nПечать данных динамической переменной\n");
+	printBook(*book_d);
 	return 0;
 }
