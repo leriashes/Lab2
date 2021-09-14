@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string>
 #include <windows.h>
-#include "myLib.h"
+#include "../myLib.h"
 using namespace std;
 
 int main() {
