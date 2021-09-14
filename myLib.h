@@ -199,7 +199,7 @@ struct book {
 	char title[30];			//Название книги
 	author author_info;		//Автор
 	int pages_number;		//Количество страниц
-	char genre[20];			//Жанр
+	char genre[30];			//Жанр
 	reader* reader_info = NULL;	//Читатель
 	publishing publ_info;	//Издательство
 	int publ_year;			//Год
