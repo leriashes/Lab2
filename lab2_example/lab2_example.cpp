@@ -36,11 +36,22 @@ int main() {
 	reader_d = (reader*)malloc(sizeof(reader));
 	author_d = (author*)malloc(sizeof(author));
 	book_d = (book*)malloc(sizeof(book));
-
+	
 	//Работа со структурой date
+	printf("Работа со структурой date\n");
 	//Ввод данных
+	printf("Ввод данных в статическую переменную\n");
 	date_st = enterDate();
+
+	printf("\nВвод данных в динамическую переменную\n");
 	*date_d = enterDate();
+
+	//Вывод данных
+	printf("\n\nПечать данных статической переменной\n");
+	printDate(date_st);
+
+	printf("\n\nПечать данных динамической переменной\n");
+	printDate(*date_d);
 
 	return 0;
 }
